@@ -28,6 +28,7 @@ Node Modules: method-override, dotenv, express-react-views
 places
 
 | Field | Type |
+| ----- | ---- |
 | _id   | Object ID |
 | name  | String |
 | city  | String |
