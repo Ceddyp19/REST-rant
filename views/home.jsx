@@ -6,7 +6,8 @@ function home() {
 
         <Def>
             <main>
-                <h1>HOME</h1>
+                <h1>REST-Rant</h1>
+                <a href='/places'>Index Page</a>
                 <div>
                     <img src='images/aloha-pizza.jpg' alt='Hawaiian Pizza '/>
                     <div>
@@ -16,7 +17,7 @@ function home() {
                 <a href="/places">
                     <button className="btn-primary">Places Page</button>
                 </a>
-
+                 
             </main>
         </Def>
     )

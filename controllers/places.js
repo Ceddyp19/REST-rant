@@ -1,5 +1,6 @@
 const router = require('express').Router()
 
+//INDEX
 router.get('/', (req, res) => {
     //res.send('GET /places')
     let places = [{
@@ -18,5 +19,17 @@ router.get('/', (req, res) => {
       
     res.render('places/index', { places })
 })
+
+//NEW
+router.get('/new', (req, res) => {
+  res.render('places/new')
+})
+
+//SHOW 
+router.get('/:id', (req, res) => {
+  res.send('This is the show page')
+})
+
+
 
 module.exports = router
