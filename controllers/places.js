@@ -3,9 +3,9 @@ const places = require('../models/places.js')
 
 //INDEX
 router.get('/', (req, res) => {
-    //res.send('GET /places')
-      
-    res.render('places/index', { places })
+  //res.send('GET /places')
+
+  res.render('places/index', { places })
 })
 
 //POST
@@ -34,7 +34,13 @@ router.get('/new', (req, res) => {
 
 //SHOW 
 router.get('/:id', (req, res) => {
-  res.send('This is the show page')
+  // res.send('This is the show page')
+  let id = Number(req.params.id)
+  if (isNaN(id) || !places[id]) {
+    res.render('error404')
+  } else {
+    res.render('places/show', { place: places[id] })
+  }
 })
 
 
