@@ -22,6 +22,7 @@ router.get('/', (req, res) => {
 
 //POST
 router.post('/', (req, res) =>{
+  console.log(req.body)
   res.send('this is the post page')
 })
 
