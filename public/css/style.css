@@ -1,5 +1,13 @@
+body {
+    text-align: center;
+}
+
 h1 {
     text-align: center;
     color: cornflowerblue;
   }
   
+img {
+    width: 200px;
+    height: 260px;
+}
