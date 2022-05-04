@@ -32,14 +32,32 @@ router.get('/new', (req, res) => {
   res.render('places/new')
 })
 
+//EDIT 
+router.get('/:id/edit', (req, res) => {
+  res.send('this is the edit page')
+})
+
+//DELETE 
+router.delete('/:id', (req, res) => {
+  console.log("delete route called")
+  res.redirect('/places')
+})
+
+
 //SHOW 
 router.get('/:id', (req, res) => {
   // res.send('This is the show page')
   let id = Number(req.params.id)
+
+
   if (isNaN(id) || !places[id]) {
+
     res.render('error404')
+
   } else {
-    res.render('places/show', { place: places[id] })
+
+    res.render('places/show', { place: places[id], id })
+
   }
 })
 
