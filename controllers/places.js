@@ -34,7 +34,16 @@ router.get('/new', (req, res) => {
 
 //EDIT 
 router.get('/:id/edit', (req, res) => {
-  res.send('this is the edit page')
+  // res.send('this is the edit page')
+  let id = Number(req.params.id)
+  if (isNaN(id) || !places[id]) {
+
+    res.render('error404')
+
+  } else {
+    places.splice(id, 1)
+    res.render('places/edit', {place: places[id]})
+  }
 })
 
 //DELETE 
@@ -48,7 +57,7 @@ router.delete('/:id', (req, res) => {
     places.splice(id, 1)
     res.redirect('/places')
   }
-  
+
 })
 
 
@@ -56,7 +65,7 @@ router.delete('/:id', (req, res) => {
 router.get('/:id', (req, res) => {
   // res.send('This is the show page')
   let id = Number(req.params.id)
-
+  console.log('hitting show route', id)
 
   if (isNaN(id) || !places[id]) {
 
@@ -69,6 +78,10 @@ router.get('/:id', (req, res) => {
   }
 })
 
+//PUT
+router.put('/:id', (req, res) => {
+  res.send('this is the put route')
+})
 
 
 module.exports = router
