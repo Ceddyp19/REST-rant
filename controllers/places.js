@@ -24,19 +24,6 @@ router.post('/', (req, res) => {
     console.log('err', err)
     res.render('error404')
   })
-  // if (!req.body.pic) {
-  //   // Default image if one is not provided
-  //   req.body.pic = 'http://placekitten.com/400/400'
-  // }
-  // if (!req.body.city) {
-  //   req.body.city = 'Anytown'
-  // }
-  // if (!req.body.state) {
-  //   req.body.state = 'USA'
-  // }
-  // places.push(req.body)
-  // //res.send('POST /places')
-  // res.redirect('/places')
 })
 
 
@@ -77,19 +64,15 @@ router.delete('/:id', (req, res) => {
 
 //SHOW 
 router.get('/:id', (req, res) => {
-  // res.send('This is the show page')
-  let id = Number(req.params.id)
-  console.log('hitting show route', id)
-
-  if (isNaN(id) || !places[id]) {
-
+  db.Place.findById(req.params.id)
+  .then(place => {
+    res.render('places/show', {place})
+  }).catch(err => {
+    console.log('err', err)
     res.render('error404')
+  })
 
-  } else {
 
-    res.render('places/show', { place: places[id], id })
-
-  }
 })
 
 //PUT
