@@ -13,10 +13,15 @@ function show(data) {
                 </div>
                 <div>
                     <h2>Description</h2>
-                    <p>Location: {data.place.city}, {data.place.state}</p>
-                    <p>Cuisine: {data.place.cuisines}</p>
+                    <h3>
+                        {data.place.showEstablished()}
+                    </h3>
+                    <h4>
+                        Serving {data.place.cuisines}
+                    </h4>
                 </div>
                 <div>
+                    <hr/>
                     <h2>Comments</h2>
                     <p>no comments yet!</p>
                 </div>
