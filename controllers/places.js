@@ -14,7 +14,7 @@ router.get('/', (req, res) => {
     })
 })
 
-//POST
+//POST Place
 router.post('/', (req, res) => {
   db.Place.create(req.body)
     .then(() => {
@@ -27,7 +27,7 @@ router.post('/', (req, res) => {
         for (var field in err.errors) {
           message += `${field} was ${err.errors[field].value}. `
           message += `${err.errors[field].message}`
-      }
+        }
         res.render('places/new', { message })
       } else {
         console.log('err', err)
@@ -36,6 +36,34 @@ router.post('/', (req, res) => {
     })
 })
 
+//POST Comment
+router.post('/:id/comment', (req, res) => {
+  console.log(req.body)
+  console.log('Object Id', req.params)
+  db.Place.findById(req.params.id)
+    .then(place => {
+      console.log('find place by id')
+      db.Comment.create(req.body)
+        .then(comment => {
+          console.log('Create comment')
+          place.comments.push(comment.id)
+          place.save()
+            .then(() => {
+              res.redirect(`/places/${req.params.id}`)
+            })
+        })
+        .catch(err => {
+          console.log('caught err at comment creation', err)
+          res.render('error404')
+        })
+    })
+    .catch(err => {
+      console.log('caught err at place discovery',err)
+      res.render('error404')
+    })
+  req.body.rant = req.body.rant ? true : false
+
+})
 
 //NEW
 router.get('/new', (req, res) => {
@@ -74,6 +102,7 @@ router.delete('/:id', (req, res) => {
 //SHOW 
 router.get('/:id', (req, res) => {
   db.Place.findById(req.params.id)
+    .populate('comments')
     .then(place => {
       res.render('places/show', { place })
     }).catch(err => {
