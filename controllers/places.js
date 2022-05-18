@@ -81,7 +81,7 @@ router.get('/:id/edit', (req, res) => {
     })
 })
 
-//DELETE 
+//DELETE Place
 router.delete('/:id', (req, res) => {
   db.Place.findByIdAndDelete(req.params.id)
     .then(place => {
@@ -93,6 +93,27 @@ router.delete('/:id', (req, res) => {
     })
 })
 
+//DELETE Comment
+router.delete('/:place_id/comment/:comment_id', (req, res) => {
+  console.log("Comment will be deleted")
+  db.Comment.findByIdAndDelete(req.params.comment_id)
+  .then(() => {
+    console.log('place params', req.params.place_id)
+    db.Place.findById(req.params.place_id)
+    .then(place => {
+      console.log('place object', place)
+      res.redirect(`/places/${req.params.place_id}`)
+    })
+    .catch(err => {
+      console.log('err', err)
+      res.render('error404')
+    })
+  })
+  .catch(err => {
+    console.log('err', err)
+    res.render('error404')
+  })
+})
 
 //SHOW 
 router.get('/:id', (req, res) => {
