@@ -11,7 +11,7 @@ function edit_form(data) {
             {/* {console.log('this data', data.place)} */}
             <main>
                 <h1>Edit Place</h1>
-                <form method="POST" action={`/places/${data.id}?_method=PUT`}>
+                <form method="POST" action={`/places/${data.place.id}?_method=PUT`}>
                     <div className="row">
                         <div className="form-group col-sm-6">
                             <label htmlFor="name">Place Name</label>
@@ -33,8 +33,12 @@ function edit_form(data) {
                             <label htmlFor="cuisines">Cuisines</label>
                             <input className='form-control' id="cuisines" name='cuisines' value={data.place.cuisines} />
                         </div>
-                        <button type="submit" className="btn">
-                            Finish Edit
+                        <div className="form-group col-sm-4">
+                            <label htmlFor="founded">Founded</label>
+                            <input className='form-control' id="founded" name='founded' value={data.place.founded} />
+                        </div>
+                        <button type="submit" className="btn btn-primary">
+                            Update Place
                         </button>
                     </div>
                 </form>
